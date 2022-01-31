@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudguard-kubernetes-deployment
+  labels:
+    app: accelerator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: accelerator
+  template:
+    metadata:
+      labels:
+        app: accelerator
+    spec:
+      containers:
+      - name: accelerator
+        image: cloudguardregistry.azurecr.io/nats:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: myregistry
+    
