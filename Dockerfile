@@ -1,4 +1,5 @@
-FROM nginx
-
-COPY Webpage2/nginx.config /etc/nginx/conf.d/default.conf
-COPY Webpage2/index.html /usr/share/nginx/html
+FROM python:3.7
+WORKDIR /usr/app/src
+COPY . ./
+RUN pip3 install websockets asyncio
+CMD ["sh","-c","echo http://localhost:8080/simulation.html && python simulation.py"]
